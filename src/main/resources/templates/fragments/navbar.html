@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbarFragment">
+	<div class="container-fluid">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item">
+					<a class="nav-link text-success" th:href="@{/ikusi-erreserba}">Ikusi Erreserbak</a>
+				</li>
+				<li class="nav-item">
+								<a class="nav-link" th:href="@{/ikusi-kotxeak}">Ikusi Kotxeak</a>
+							</li>	
+							
+				<li class="nav-item">
+									<a class="nav-link text-success" th:href="@{/ikusi-garajea}">Nire garajea</a>
+								</li>
+
+				<li class="nav-item">
+					<a th:if="${rol eq 'ROLE_ADMIN'}" class="nav-link" th:href="@{/gehi-kotxea}">Kotxea Gehitu</a>
+				</li>	
+				
+				
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/logout}">Sesioa itxi</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

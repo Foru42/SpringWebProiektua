@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nire Erreserbak</title>
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+	<!-- Header -->
+	<header class="bg-dark text-white text-center py-3">
+		<h2>Nire Erreserbak</h2>
+	</header>
+	<div th:replace="fragments/navbar :: navbarFragment"></div>
+	<!-- Main Container -->
+	<div class="container my-5">
+		<div class="card shadow p-4">
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover text-center align-middle">
+					<thead class="table-dark">
+						<tr>
+							<th>Irudia</th>
+							<th>Marka</th>
+							<th>Modeloa</th>
+							<th>Urtea</th>
+							<th>Prezioa</th>
+							<th>Erreserba data</th>
+							<th>Estatua</th>
+							<th>Akzioak</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="erreserba : ${erreserbak}">
+							<td>
+								<img th:if="${erreserba.kotxea.irudiaBase64 != null}"
+									th:src="|data:image/jpeg;base64,${erreserba.kotxea.irudiaBase64}|"
+									class="img-thumbnail" style="max-width: 150px;">
+								<span th:if="${erreserba.kotxea.irudiaBase64 == null}" class="text-muted">Ez
+									baliogarri</span>
+							</td>
+							<td th:text="${erreserba.kotxea.marka}"></td>
+							<td th:text="${erreserba.kotxea.modeloa}"></td>
+							<td th:text="${erreserba.kotxea.urtea}"></td>
+							<td th:text="${erreserba.kotxea.prezioa}"></td>
+							<td th:text="${#dates.format(erreserba.erreserbaData, 'yyyy-MM-dd')}"></td>
+							<td th:text="${erreserba.egoera}"></td>
+							<td>
+								<a th:href="@{/eliminar-Erreserba/{id}(id=${erreserba.id})}"
+									class="btn btn-danger btn-sm">Ezabatu</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="text-center mt-4">
+			<a href="/ikusi-kotxeak" class="btn btn-secondary">Bueltatu</a>
+		</div>
+	</div>
+
+	<!-- Bootstrap 5 JS Bundle -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

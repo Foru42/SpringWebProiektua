@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kotxearen Espezifikazioak</title>
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			background: linear-gradient(135deg, #f3f4f6, #e9ecef);
+		}
+
+		.spec-img {
+			max-width: 100%;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.spec-title {
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+
+		.spec-value {
+			font-size: 1.2rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container py-5">
+		<div th:replace="fragments/navbar :: navbarFragment"></div>
+		
+		<h2 class="text-center text-primary fw-bold mb-4">Kotxearen Espezifikazioak</h2>
+
+		<div class="row">
+			<div class="col-md-6">
+				<img th:if="${coche.irudiaBase64 != null}" th:src="|data:image/jpeg;base64,${coche.irudiaBase64}|"
+					alt="Imagen del coche" class="spec-img">
+				<div th:if="${coche.irudiaBase64 == null}"
+					class="d-flex align-items-center justify-content-center bg-secondary text-light"
+					style="height: 300px;">
+					<span class="text-muted">Ez Baliogarri</span>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<td class="spec-title">Marka:</td>
+							<td class="spec-value" th:text="${coche.marka}"></td>
+						</tr>
+						<tr>
+							<td class="spec-title">Modeloa:</td>
+							<td class="spec-value" th:text="${coche.modeloa}"></td>
+						</tr>
+						<tr>
+							<td class="spec-title">Urtea:</td>
+							<td class="spec-value" th:text="${coche.urtea}"></td>
+						</tr>
+						<tr>
+							<td class="spec-title">Prezioa:</td>
+							<td class="spec-value text-success" th:text="${coche.prezioa} + ' €'"></td>
+						</tr>
+						<tr>
+							<td class="spec-title">Deskripzioa:</td>
+							<td class="spec-value" th:text="${coche.Deskripzioa}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="d-flex gap-3 mt-4">
+					<a th:href="@{/erreserbatu-kotxea/{id}(id=${coche.id})}" class="btn btn-success">Erreserbatu</a>
+					<a href="/ikusi-kotxeak" class="btn btn-secondary">Bueltatu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap 5 JS Bundle -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

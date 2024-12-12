@@ -1,0 +1,95 @@
+<!-- erreserbaKonfirma.html -->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Erreserba Berretsi</title>
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		.background-image {
+			position: relative;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: rgb(0, 0, 0);
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+		}
+
+		.overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 1;
+		}
+
+		.content {
+			position: relative;
+			z-index: 2;
+			background-color: rgba(255, 255, 255, 0.9);
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			max-width: 600px;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Sección con imagen de fondo -->
+	<div class="background-image"
+		th:style="'background-image: url(data:image/jpeg;base64,' + ${coche.irudiaBase64} + ');'">
+		<div class="overlay"></div>
+		<div class="content text-center">
+			<h2 class="mb-4">Erreserba Berretsi</h2>
+			<div class="summary text-start">
+				<p><strong>Erabiltzaile izena:</strong> <span th:text="${usuario.nombre}">Erabiltzailea</span></p>
+				<p><strong>Kotxea:</strong> <span th:text="${coche.marka}">Kotxearen Marka</span> - <span
+						th:text="${coche.modeloa}">Kotxearen Modeloa</span> - <span
+						th:text="${coche.urtea}">Urtea</span></p>
+				<p><strong>Prezioa:</strong> <span th:text="${coche.prezioa}">Kotxearen Prezioa</span> €</p>
+
+				<div class="mt-4">
+					<h5>Garajea:</h5>
+					<p><strong>Kalea:</strong> <span th:text="${garaje.direkzioa.kalea}">Kalea</span></p>
+					<p><strong>Hiria:</strong> <span th:text="${garaje.direkzioa.herria}">Hiria</span></p>
+					<p><strong>Posta Kodea:</strong> <span th:text="${garaje.direkzioa.postaKode}">Posta
+							Kodea</span></p>
+				</div>
+				<p><strong>Egoera:</strong> Erreserba baieztatzeko zain</p>
+				<p><strong>Erreserba Data:</strong></p>
+
+				<form action="#" th:action="@{/confirmar-reserva/{id}(id=${coche.id})}" method="post">
+					<input type="date" name="fechaReserva" class="form-control mb-3" required>
+
+
+					<div th:if="${errorMessage}" class="text-danger mb-3">
+						<p th:text="${errorMessage}"></p>
+					</div>
+
+					<div class="d-flex justify-content-between">
+						<button type="submit" class="btn btn-success">Erreserba Berretsi</button>
+						<a href="/ikusi-kotxeak" class="btn btn-danger">Utzi</a>
+					</div>
+				</form>
+
+				<!-- Mostrar dirección del garaje -->
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap 5 JS Bundle -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

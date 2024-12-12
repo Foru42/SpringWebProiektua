@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bete Garajearen Direkzioa</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			background-color: #f8f9fa;
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 50px auto;
+			background: #ffffff;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			text-align: center;
+			color: #495057;
+			margin-bottom: 20px;
+		}
+
+		label {
+			font-weight: bold;
+			color: #343a40;
+		}
+
+		.btn-primary {
+			width: 100%;
+			margin-top: 15px;
+		}
+
+		.alert {
+			margin-top: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Bete Garajearen Direkzioa</h1>
+
+		<div th:if="${errorMessage}" class="alert alert-danger text-center">
+			<p th:text="${errorMessage}"></p>
+		</div>
+
+		<form action="/gorde-garaje" method="post">
+			<div class="mb-3">
+				<label for="kalea" class="form-label">Kalea:</label>
+				<input type="text" id="kalea" name="kalea" class="form-control" placeholder="Sartu kalea" required
+					maxlength="20" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+">
+			</div>
+			<div class="mb-3">
+				<label for="herria" class="form-label">Hiria:</label>
+				<input type="text" id="herria" name="herria" class="form-control" placeholder="Sartu hiria" required
+					maxlength="20" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+">
+			</div>
+			<div class="mb-3">
+				<label for="postaKode" class="form-label">Posta Kodea:</label>
+				<input type="text" id="postaKode" name="postaKode" class="form-control" placeholder="Sartu posta kodea"
+					required maxlength="5" pattern="\d{5}">
+			</div>
+			<button type="submit" class="btn btn-primary">Gorde Garajea</button>
+		</form>
+	</div>
+
+	<!-- Bootstrap JS (Optional for Interactivity) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
