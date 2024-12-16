@@ -88,6 +88,7 @@ public class GarajeaController {
 		Garajea garaje = garajeaRepository.findById(user.getGaraje().getId()).orElse(null);
 		if (garaje != null) {
 			model.addAttribute("garaje", garaje);
+			model.addAttribute("telefonoa", user.getTelefonoak().get(0));
 		} else {
 			model.addAttribute("errorMessage", "Errorea: Garajea aurkitu ezin da.");
 			return "error";
@@ -95,4 +96,5 @@ public class GarajeaController {
 
 		return "garajeaIkusi";
 	}
+
 }

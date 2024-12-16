@@ -34,6 +34,12 @@
 				<input type="text" id="postaKode" name="postaKode" class="form-control" placeholder="Sartu posta kodea"
 					th:value="${garaje.direkzioa.postaKode}" required maxlength="5" pattern="\d{5}">
 			</div>
+			
+			<div class="mb-3">
+					<label for="telf" class="form-label">Telefonoa:</label>
+					<input type="text" id="telf" name="telf" class="form-control" placeholder="Sartu Telefonoa"
+						th:value="${telefonoa}" >
+				</div>
 			<button type="submit" class="btn btn-primary">Eguneratu Garajea</button>
 
 		</form>

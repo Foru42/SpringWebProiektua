@@ -19,18 +19,30 @@
 		</div>
 
 		<form th:action="@{/register}" method="post">
+			<!-- Campo Izena -->
 			<div class="mb-3">
 				<label for="nombre" class="form-label">Izena:</label>
 				<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Sartu zure Izena"
-					required>
+					pattern="\d{5}"
+					title="Izena ezin du zenbakirik izan, bakarrik letrak eta espazioak onartzen dira." required>
 			</div>
 
+			<!-- Campo Pasahitza -->
 			<div class="mb-3">
 				<label for="password" class="form-label">Pasahitza:</label>
 				<input type="password" id="password" name="password" class="form-control"
 					placeholder="Sartu zure pasahitza" required>
 			</div>
 
+			<!-- Campo Telefonoa -->
+			<div class="mb-3">
+				<label for="telefono" class="form-label">Telefonoa:</label>
+				<input type="text" id="telefono" name="telefono" class="form-control" placeholder="Sartu zure telefonoa"
+					maxlength="9" pattern="\d{5}"
+					title="Telefonoak 9 zenbaki izan behar ditu eta bakarrik zenbakiak onartzen dira." required>
+			</div>
+
+			<!-- Direkzioa -->
 			<h3 class="mb-3">Garajearen direkzioa (Opzionala)</h3>
 
 			<div class="mb-3">
@@ -44,15 +56,18 @@
 			</div>
 
 			<div class="mb-3">
-				<label for="postaKode" class="form-label">Poasta Kodea:</label>
+				<label for="postaKode" class="form-label">Posta Kodea:</label>
 				<input type="text" id="postaKode" name="postaKode" class="form-control"
 					placeholder="Sartu zure Posta Kodea">
 			</div>
 
+			<!-- Botón -->
 			<div class="d-grid">
 				<button type="submit" class="btn btn-success">Erregistratu</button>
 			</div>
 		</form>
+
+
 
 		<div class="text-center mt-3">
 			<p>¿Baduzu kontua? <a href="#" th:href="@{/login}">Hasi sesioa hemen</a></p>

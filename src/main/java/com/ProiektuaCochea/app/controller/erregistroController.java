@@ -1,5 +1,7 @@
 package com.ProiektuaCochea.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,53 +19,54 @@ import com.ProiektuaCochea.app.repository.GarajeaRepository;
 @Controller
 public class erregistroController {
 
-    @Autowired
-    private ErabiltzaileaRepository erabiltzaileaRepository;
+	@Autowired
+	private ErabiltzaileaRepository erabiltzaileaRepository;
 
-    @Autowired
-    private GarajeaRepository garajeRepository;
+	@Autowired
+	private GarajeaRepository garajeRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/register")
-    public String registerPage() {
-        return "register";
-    }
+	@GetMapping("/register")
+	public String registerPage() {
+		return "register";
+	}
 
-    @PostMapping("/register")
-    public String register(
-            @RequestParam String nombre, 
-            @RequestParam String password,
-            @RequestParam(required = false) Boolean rol, 
-            @RequestParam(required = false) String kalea, 
-            @RequestParam(required = false) String herria,
-            @RequestParam(required = false) String postaKode, 
-            Model model) {
+	@PostMapping("/register")
+	public String register(@RequestParam String nombre, @RequestParam String password,
+			@RequestParam(required = false) Boolean rol, @RequestParam(required = false) String kalea,
+			@RequestParam(required = false) String herria, @RequestParam(required = false) String postaKode,
+			@RequestParam(required = false) String telefono, Model model) {
 
-        // Verificar si el usuario ya existe
-        if (erabiltzaileaRepository.findByNombre(nombre) != null) {
-            model.addAttribute("errorMessage", "Erabiltzailea " + nombre + " Badago erregistratuta, mesedez sartu beste erabiltzaile bat.");
-            return "register";
-        }
+		if (erabiltzaileaRepository.findByNombre(nombre) != null) {
+			model.addAttribute("errorMessage",
+					"Erabiltzailea " + nombre + " Badago erregistratuta, mesedez sartu beste erabiltzaile bat.");
+			return "register";
+		}
 
-        if (rol == null) {
-            rol = false;
-        }
+		if (rol == null) {
+			rol = false;
+		}
 
-        String encodedPassword = passwordEncoder.encode(password);
-        erabiltzailea user = new erabiltzailea(nombre, encodedPassword, rol);
+		String encodedPassword = passwordEncoder.encode(password);
+		erabiltzailea user = new erabiltzailea(nombre, encodedPassword, rol);
 
-        if (kalea != null && !kalea.isEmpty() && herria != null && !herria.isEmpty() && postaKode != null && !postaKode.isEmpty()) {
-            Direkzioa direkzioa = new Direkzioa(kalea, herria, postaKode);
-            Garajea garaje = new Garajea(direkzioa);
-            garaje.setErabiltzailea(user);
-            user.setGaraje(garaje);
-            garajeRepository.save(garaje);
-        }
+		if (telefono != null && !telefono.isEmpty()) {
+			user.setTelefonoak(List.of(telefono));
+		}
 
-        erabiltzaileaRepository.save(user);
+		if (kalea != null && !kalea.isEmpty() && herria != null && !herria.isEmpty() && postaKode != null
+				&& !postaKode.isEmpty()) {
+			Direkzioa direkzioa = new Direkzioa(kalea, herria, postaKode);
+			Garajea garaje = new Garajea(direkzioa);
+			garaje.setErabiltzailea(user);
+			user.setGaraje(garaje);
+			garajeRepository.save(garaje);
+		}
 
-        return "redirect:/login";
-    }
+		erabiltzaileaRepository.save(user);
+
+		return "redirect:/login";
+	}
 }

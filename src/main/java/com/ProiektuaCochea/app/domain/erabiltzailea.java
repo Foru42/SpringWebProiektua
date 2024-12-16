@@ -1,8 +1,6 @@
 package com.ProiektuaCochea.app.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,8 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,17 +41,12 @@ public class erabiltzailea {
 	@JoinColumn(name = "garaje_id")
 	private Garajea garaje;
 
-    @ManyToMany
-    @JoinTable(
-        name = "erabiltzailea_gidaria",
-        joinColumns = @JoinColumn(name = "erabiltzailea_id"),
-        inverseJoinColumns = @JoinColumn(name = "gidaria_id")
-    )
-    private Set<Gidaria> gidariak = new HashSet<>();
-
 	public erabiltzailea(String nombre, String password, Boolean rol) {
 		this.nombre = nombre;
 		this.password = password;
 		this.rol = rol;
 	}
+	
+
+
 }
